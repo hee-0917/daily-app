@@ -1,5 +1,5 @@
 // lib/db.ts
-import { db } from './firebase';
+import { db } from './firebase-config';
 import { 
   collection, addDoc, updateDoc, deleteDoc, doc, 
   query, orderBy, getDocs, Timestamp 
