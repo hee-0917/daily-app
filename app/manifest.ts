@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Daily Expense App',
-    short_name: 'Expense App',
+    name: '소비요정',
+    short_name: '소비요정',
     description: '일일 지출 관리 앱',
     start_url: '/',
     display: 'standalone',
