@@ -7,6 +7,10 @@ import { ExpenseSummary } from "./expense-summary"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { QuickExpense } from "./quick-expense"
 import { addExpense, getExpenses, updateExpense, deleteExpense } from "@/lib/db"
+import { 
+  collection, addDoc, updateDoc, deleteDoc, doc, 
+  query, orderBy, getDocs, Timestamp 
+} from 'firebase/firestore';
 
 export type Expense = {
   id: string
@@ -19,7 +23,6 @@ export type TimeFrame = "daily" | "weekly" | "monthly"
 
 export default function ExpenseTracker() {
   const [expenses, setExpenses] = useState<Expense[]>([])
-  const [timeFrame, setTimeFrame] = useState<TimeFrame>("daily")
   const [loading, setLoading] = useState(true)
 
   // Firebase에서 지출 내역 가져오기
@@ -94,20 +97,20 @@ export default function ExpenseTracker() {
             )}
           </TabsContent>
           <TabsContent value="summary" className="mt-2">
-            <Tabs defaultValue="daily" onValueChange={(v) => setTimeFrame(v as TimeFrame)}>
+            <Tabs defaultValue="daily">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="daily">일별</TabsTrigger>
                 <TabsTrigger value="weekly">주간</TabsTrigger>
                 <TabsTrigger value="monthly">월별</TabsTrigger>
               </TabsList>
               <TabsContent value="daily" className="mt-4">
-                <ExpenseSummary expenses={expenses} timeFrame="daily" />
+                <ExpenseSummary expenses={expenses} />
               </TabsContent>
               <TabsContent value="weekly" className="mt-4">
-                <ExpenseSummary expenses={expenses} timeFrame="weekly" />
+                <ExpenseSummary expenses={expenses} />
               </TabsContent>
               <TabsContent value="monthly" className="mt-4">
-                <ExpenseSummary expenses={expenses} timeFrame="monthly" />
+                <ExpenseSummary expenses={expenses} />
               </TabsContent>
             </Tabs>
           </TabsContent>

@@ -2,7 +2,7 @@
 import { db } from './firebase';
 import { 
   collection, addDoc, updateDoc, deleteDoc, doc, 
-  query, where, orderBy, getDocs, Timestamp 
+  query, orderBy, getDocs, Timestamp 
 } from 'firebase/firestore';
 import type { Expense } from '@/components/expense-tracker';
 
