@@ -1,31 +1,18 @@
-// lib/firebase.ts
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import { getAnalytics } from 'firebase/analytics';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+  apiKey: "AIzaSyBdBMXXU4dusAOEA5SMZbViODpk8noVEM0",
+  authDomain: "daily-f8a7e.firebaseapp.com",
+  databaseURL: "https://daily-f8a7e-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "daily-f8a7e",
+  storageBucket: "daily-f8a7e.firebasestorage.app",
+  messagingSenderId: "9300445015",
+  appId: "1:9300445015:web:cf8acc72cf656795a26012"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Firestore 인스턴스 생성
-export const db = getFirestore(app);
-
-// Auth 인스턴스 생성
-export const auth = getAuth(app);
-
-// Analytics는 브라우저 환경에서만 초기화
-let analytics = null;
-if (typeof window !== 'undefined') {
-  analytics = getAnalytics(app);
-}
-export { analytics };
