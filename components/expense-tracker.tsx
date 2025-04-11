@@ -104,13 +104,13 @@ export default function ExpenseTracker() {
                 <TabsTrigger value="monthly">월별</TabsTrigger>
               </TabsList>
               <TabsContent value="daily" className="mt-4">
-                <ExpenseSummary expenses={expenses} />
+                <ExpenseSummary expenses={expenses} timeFrame="daily" />
               </TabsContent>
               <TabsContent value="weekly" className="mt-4">
-                <ExpenseSummary expenses={expenses} />
+                <ExpenseSummary expenses={expenses} timeFrame="weekly" />
               </TabsContent>
               <TabsContent value="monthly" className="mt-4">
-                <ExpenseSummary expenses={expenses} />
+                <ExpenseSummary expenses={expenses} timeFrame="monthly" />
               </TabsContent>
             </Tabs>
           </TabsContent>
