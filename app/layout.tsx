@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "소비요정정",
+  title: "소비요정",
   description: "일일 지출 관리 앱앱",
 };
 
