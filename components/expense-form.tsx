@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -14,9 +14,17 @@ type ExpenseFormProps = {
 }
 
 export function ExpenseForm({ onAddExpense, initialExpense, onCancel, isEditing = false }: ExpenseFormProps) {
-  const [date, setDate] = useState(initialExpense?.date || new Date().toISOString().split("T")[0])
+  const [date, setDate] = useState(initialExpense?.date || "")
   const [title, setTitle] = useState(initialExpense?.title || "")
   const [amount, setAmount] = useState(initialExpense?.amount.toString() || "")
+
+  useEffect(() => {
+    if (!isEditing) {
+      setDate(new Date().toISOString().split("T")[0])
+    } else if (initialExpense?.date) {
+      setDate(initialExpense.date)
+    }
+  }, [isEditing, initialExpense])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -32,7 +40,8 @@ export function ExpenseForm({ onAddExpense, initialExpense, onCancel, isEditing 
     })
 
     if (!isEditing) {
-      // Only reset form if we're adding a new expense, not editing
+      // 폼 초기화 시 날짜도 현재 날짜로 재설정
+      setDate(new Date().toISOString().split("T")[0])
       setTitle("")
       setAmount("")
     }
@@ -47,7 +56,18 @@ export function ExpenseForm({ onAddExpense, initialExpense, onCancel, isEditing 
       <div className="space-y-4">
         <div>
           <Label htmlFor="date">날짜</Label>
-          <Input id="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+          <Input 
+            id="date" 
+            type="date" 
+            value={date} 
+            onChange={(e) => setDate(e.target.value)} 
+            required 
+            onFocus={(e) => {
+              if (!date) {
+                setDate(new Date().toISOString().split("T")[0])
+              }
+            }}
+          />
         </div>
         <div>
           <Label htmlFor="title">항목</Label>
